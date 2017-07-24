@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/auto_nomeTx"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="nome"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/auto_sobrenomeTx"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/auto_nomeTx"
+        android:layout_marginLeft="8dp"
+        android:text="sobrenome"/>
+
+    <TextView
+        android:id="@+id/auto_emailTx"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/auto_nomeTx"
+        android:text="email"/>
+
+</RelativeLayout>

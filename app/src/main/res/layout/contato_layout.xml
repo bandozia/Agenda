@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:id="@+id/linearTopo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="110dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/imgUser"
+            android:layout_weight="1"
+            android:src="@mipmap/sr_madruga"/>
+
+        <Button
+            android:id="@+id/fotinhaBt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="fotinha"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/labelNome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/linearTopo"
+        android:text="@string/label_nome"
+        android:layout_marginTop="10dp"/>
+
+    <EditText
+        android:id="@+id/edtxNome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/labelNome"/>
+
+    <TextView
+        android:id="@+id/labelSobrenome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edtxNome"
+        android:text="@string/label_sobrenome"
+        android:layout_marginTop="10dp"/>
+
+    <EditText
+        android:id="@+id/edTxSobrenome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/labelSobrenome" />
+
+    <TextView
+        android:id="@+id/labelEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edTxSobrenome"
+        android:text="@string/label_email"
+        android:layout_marginTop="10dp"/>
+
+    <EditText
+        android:id="@+id/edTxEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:layout_below="@id/labelEmail" />
+
+    <TextView
+        android:id="@+id/labelTelefone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edTxEmail"
+        android:text="@string/label_cpf"
+        android:layout_marginTop="10dp"/>
+
+    <EditText
+        android:id="@+id/edTxCpf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:maxLength="14"
+        android:layout_below="@id/labelTelefone" />
+
+    <Button
+        android:id="@+id/btCadastrarContato"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CADASTRAR"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"/>
+
+    <Button
+        android:id="@+id/btDeletarContato"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="deletar"
+        android:visibility="invisible"
+        android:layout_alignParentBottom="true"/>
+
+
+</RelativeLayout>
