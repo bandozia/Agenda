@@ -17,7 +17,7 @@ import com.andozia.contatolib.ContatoPF;
 
 import java.util.ArrayList;
 import java.util.List;
-
+//Adapter especifico para o autocomplete text view
 public class AutocompleteAdapter extends ArrayAdapter<ContatoPF> {
 
     private Context contex;
