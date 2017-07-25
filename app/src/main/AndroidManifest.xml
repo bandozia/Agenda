@@ -27,6 +27,7 @@
         <activity android:name=".app.controller.RelativeLayoutActivity" />
         <activity android:name=".app.controller.TableLayoutActivity" />
         <activity android:name=".app.controller.MenuContatoActivity" />
+        <activity android:name=".app.controller.DownloadImageActivity" />
 
 
     </application>

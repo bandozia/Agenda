@@ -49,6 +49,12 @@
             android:layout_height="wrap_content"
             android:text="lista"/>
 
+        <Button
+            android:id="@+id/btMenuDownload"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="download image"/>
+
     </LinearLayout>
 
 
