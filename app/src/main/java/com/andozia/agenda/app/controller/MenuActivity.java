@@ -18,6 +18,7 @@ public class MenuActivity extends Activity implements View.OnClickListener {
         setContentView(R.layout.menu_layout);
 
         ((Button) findViewById(R.id.btMenuContato)).setOnClickListener(this);
+        ((Button) findViewById(R.id.btMenuDownload)).setOnClickListener(this);
 
     }
 
@@ -32,6 +33,9 @@ public class MenuActivity extends Activity implements View.OnClickListener {
                 intent = new Intent(this, MenuContatoActivity.class);
                 break;
 
+            case R.id.btMenuDownload:
+                intent = new Intent(this, DownloadImageActivity.class);
+                break;
         }
 
         if (intent != null){
