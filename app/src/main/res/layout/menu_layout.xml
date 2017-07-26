@@ -38,22 +38,16 @@
             android:text="contato"/>
 
         <Button
-            android:id="@+id/btMenuWebView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="webview"/>
-
-        <Button
-            android:id="@+id/btMenuLista"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="lista"/>
-
-        <Button
             android:id="@+id/btMenuDownload"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="download image"/>
+
+        <Button
+            android:id="@+id/btMenuWebservice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="web service"/>
 
     </LinearLayout>
 

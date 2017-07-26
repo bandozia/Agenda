@@ -19,14 +19,13 @@ public class MenuActivity extends Activity implements View.OnClickListener {
 
         ((Button) findViewById(R.id.btMenuContato)).setOnClickListener(this);
         ((Button) findViewById(R.id.btMenuDownload)).setOnClickListener(this);
-
+        ((Button) findViewById(R.id.btMenuWebservice)).setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
 
         Intent intent = null;
-
         switch (v.getId()){
 
             case R.id.btMenuContato:
@@ -35,6 +34,10 @@ public class MenuActivity extends Activity implements View.OnClickListener {
 
             case R.id.btMenuDownload:
                 intent = new Intent(this, DownloadImageActivity.class);
+                break;
+
+            case R.id.btMenuWebservice:
+                intent = new Intent(this, WebServiceActivity.class);
                 break;
         }
 
