@@ -42,28 +42,18 @@ public class Utils {
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             Date data;
 
-            JSONObject object = jsonArray.getJSONObject(0);
-
-            pessoa.setEmail(object.getString("email"));
-            pessoa.setUsername(object.getString("username"));
-            pessoa.setSenha(object.getString("password"));
-            pessoa.setTelefone(object.getString("phone"));
-
-            pessoa.setNascimento(object.getString("dob"));
-
-            JSONObject nome = object.getJSONObject("name");
-
-            pessoa.setNome(object.getString("first"));
-            pessoa.setSobrenome(object.getString("last"));
-
-            JSONObject endereco = object.getJSONObject("location");
-            pessoa.setEndereco(endereco.getString("street"));
-            pessoa.setCidade(endereco.getString("city"));
-            pessoa.setEstado(endereco.getString("state"));
-
-            JSONObject foto = object.getJSONObject("picture");
-            pessoa.setCaminhoFoto(foto.getString("large"));
-            pessoa.setFoto(baixarImagem(foto.getString("large")));
+            JSONObject mainObject = jsonArray.getJSONObject(0);
+            pessoa.setNome(mainObject.getJSONObject("name").getString("first"));
+            pessoa.setSobrenome(mainObject.getJSONObject("name").getString("last"));
+            pessoa.setEndereco(mainObject.getJSONObject("location").getString("street"));
+            pessoa.setCidade(mainObject.getJSONObject("location").getString("city"));
+            pessoa.setEstado(mainObject.getJSONObject("location").getString("state"));
+            pessoa.setEmail(mainObject.getString("email"));
+            pessoa.setUsername(mainObject.getJSONObject("login").getString("username"));
+            pessoa.setNascimento(mainObject.getString("dob"));
+            pessoa.setTelefone(mainObject.getString("phone"));
+            pessoa.setCaminhoFoto(mainObject.getJSONObject("picture").getString("large"));
+            pessoa.setFoto(baixarImagem(mainObject.getJSONObject("picture").getString("large")));
 
         }catch (Exception e){
             Log.e("Utils", e.getMessage());
