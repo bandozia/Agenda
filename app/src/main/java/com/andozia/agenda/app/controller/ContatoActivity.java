@@ -3,6 +3,7 @@ package com.andozia.agenda.app.controller;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
@@ -19,6 +20,8 @@ import com.andozia.agenda.R;
 import com.andozia.agenda.domain.ContatoDomain;
 import com.andozia.contatolib.Contato;
 import com.andozia.contatolib.ContatoPF;
+
+import java.net.URL;
 
 
 public class ContatoActivity extends Activity implements TextWatcher {
@@ -80,7 +83,7 @@ public class ContatoActivity extends Activity implements TextWatcher {
         emailEdText.setText(contatoInstance.getEmail());
         cpfEditText.setText(contatoInstance.getCpf());
 
-        //TODO: tratar avatar
+        //TODO: colocar imagem do usuario
     }
 
     @Override
@@ -219,5 +222,15 @@ public class ContatoActivity extends Activity implements TextWatcher {
             deletarContato(contatoInstance);
         }
     }
-
 }
+
+/***Olhar:******
+
+ - ListFragment
+ - Implementação de interface na List Fragment
+ ContatoDetalheFragmentActivity
+
+ ContatoListFragment
+ ContatoFragmentActivity
+
+ ***********/

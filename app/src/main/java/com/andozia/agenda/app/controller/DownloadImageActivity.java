@@ -16,9 +16,6 @@ import com.andozia.agenda.utils.Auxiliar;
 
 import java.io.IOException;
 
-/**
- * Created by no3603 on 24/07/2017.
- */
 
 public class DownloadImageActivity extends BaseActivity {
 
