@@ -42,9 +42,6 @@ public class BaseActivity extends AppCompatActivity {
                     new String[] {permission},
                     myPermissionRequest);
         }
-
-
-
     }
 
 }

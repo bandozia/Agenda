@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.andozia.agenda.R;
 import com.andozia.agenda.domain.ContatoDomain;
+import com.andozia.agenda.services.CepService;
 import com.andozia.contatolib.Contato;
 import com.andozia.contatolib.ContatoPF;
 
@@ -26,11 +27,15 @@ import java.net.URL;
 
 public class ContatoActivity extends Activity implements TextWatcher {
 
-    ImageView imageView;
-    EditText cpfEditText;
-    EditText nomeEdText,emailEdText,sobrenomeEdText;
-    Button salvarContatoBt;
-    Button deletarContatoBt;
+    private static final String SERVICE_KEY_CEP = "service_key_cep";
+
+    private ImageView imageView;
+    private EditText cpfEditText;
+    private EditText nomeEdText,emailEdText,sobrenomeEdText;
+    private Button salvarContatoBt;
+    private Button deletarContatoBt;
+    private EditText cepEditText;
+    private EditText enderecoEditTex;
 
     private boolean isUpdating;
     private ContatoPF contatoInstance;
@@ -48,6 +53,8 @@ public class ContatoActivity extends Activity implements TextWatcher {
         nomeEdText = (EditText) findViewById(R.id.edtxNome);
         emailEdText = (EditText) findViewById(R.id.edTxEmail);
         sobrenomeEdText = (EditText) findViewById(R.id.edTxSobrenome);
+        cepEditText = (EditText) findViewById(R.id.edTxCep);
+        enderecoEditTex = (EditText) findViewById(R.id.edTxEndereco);
 
         salvarContatoBt = (Button) findViewById(R.id.btCadastrarContato);
         deletarContatoBt = (Button) findViewById(R.id.btDeletarContato);
@@ -63,7 +70,7 @@ public class ContatoActivity extends Activity implements TextWatcher {
         }
 
 
-
+        cepEditText.setOnFocusChangeListener(new onCepFocus());
         cpfEditText.addTextChangedListener(this);
 
     }
@@ -220,6 +227,20 @@ public class ContatoActivity extends Activity implements TextWatcher {
         @Override
         public void onClick(View view) {
             deletarContato(contatoInstance);
+        }
+    }
+
+    private class onCepFocus implements View.OnFocusChangeListener{
+
+        @Override
+        public void onFocusChange(View v, boolean hasFocus) {
+            if (!hasFocus){
+                if (cepEditText.getText() != null && !cepEditText.getText().toString().equals("")){
+                    Intent intent = new Intent(ContatoActivity.this, CepService.class);
+                    intent.putExtra(CepService.CEP_EXTRA, cepEditText.getText().toString());
+                    startService(intent);
+                }
+            }
         }
     }
 }

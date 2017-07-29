@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
 
+import com.andozia.agenda.domain.Cep;
 import com.andozia.agenda.domain.Pessoa;
 
 import org.json.JSONArray;
@@ -30,6 +31,28 @@ public class Utils {
 
         return pessoa;
     }
+
+    public Cep getCep(String url){
+        Cep cep;
+        String json = NetworkUtils.getJsonFromAPI(url);
+        cep = parseCep(json);
+        return cep;
+    }
+
+    public Cep parseCep(String json){
+        Cep cep = new Cep();
+
+        try{
+            JSONObject cepJson = new JSONObject(json);
+            cep.setEndereco(cepJson.getString("logradouro"));
+            cep.setCep(cepJson.getString("cep"));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return cep;
+    }
+
 
     private Pessoa parseJson(String json){
         Pessoa pessoa = null;

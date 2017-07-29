@@ -118,3 +118,6 @@ public class WebServiceActivity extends BaseActivity {
     }
 
 }
+
+
+//olhar isso: https://stackoverflow.com/questions/4139288/android-how-to-handle-right-to-left-swipe-gestures

@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
+<RelativeLayout
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:padding="10dp">
 
@@ -84,11 +88,43 @@
         android:maxLength="14"
         android:layout_below="@id/labelTelefone" />
 
+    <TextView
+        android:id="@+id/labelCep"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edTxCpf"
+        android:text="CEP"
+        android:layout_marginTop="10dp"/>
+
+    <EditText
+        android:id="@+id/edTxCep"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:maxLength="14"
+        android:layout_below="@id/labelCep" />
+
+    <TextView
+        android:id="@+id/labelEndereco"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edTxCep"
+        android:text="Endereço"
+        android:layout_marginTop="10dp"/>
+
+    <EditText
+        android:id="@+id/edTxEndereco"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:layout_below="@id/labelEndereco" />
+
     <Button
         android:id="@+id/btCadastrarContato"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="CADASTRAR"
+        android:layout_below="@+id/edTxEndereco"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"/>
 
@@ -97,8 +133,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="deletar"
+        android:layout_below="@+id/edTxEndereco"
         android:visibility="invisible"
         android:layout_alignParentBottom="true"/>
 
 
 </RelativeLayout>
+
+</ScrollView>
