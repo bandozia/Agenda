@@ -11,7 +11,7 @@ import com.andozia.agenda.dao.helper.BancoHelper;
 public class CriaBanco extends SQLiteOpenHelper {
 
     private static final String DB_NAME = "contato_db.sqlite";
-    private static final int VERSION = 1;
+    private static final int VERSION = 2;
 
     public CriaBanco(Context context) {
         super(context, DB_NAME, null, VERSION);
@@ -35,12 +35,13 @@ public class CriaBanco extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
-        /*try{
-            db.execSQL("ALTER TABLE contato ADD COLUMN avatar VARCHAR(100)");
+        try{
+            db.execSQL("ALTER TABLE contato ADD COLUMN cep VARCHAR(9) DEFAULT('')");
+            db.execSQL("ALTER TABLE contato ADD COLUMN endereco VARCHAR(200) DEFAULT('')");
             Log.i("CriaBanco", "banco updatado");
         }catch (Exception e){
             Log.e("CriaBanco","deu pau pra alterar a tabela:" + e.getMessage());
-        }*/
+        }
     }
 
 

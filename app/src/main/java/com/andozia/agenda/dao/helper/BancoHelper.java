@@ -12,6 +12,8 @@ public class BancoHelper {
         sb.append(" email varchar(100) not null, ");
         sb.append(" cpf char(14) not null, ");
         sb.append(" avatar varchar(150) ");
+        sb.append(" cep varchar(9) ");
+        sb.append(" endereco varchar(150) ");
         sb.append(" ) ");
 
         return sb.toString();

@@ -1,10 +1,12 @@
 package com.andozia.agenda.domain;
 
+import java.io.Serializable;
+
 /**
  * Created by no3603 on 28/07/2017.
  */
 
-public class Cep {
+public class Cep implements Serializable {
 
     private String cep;
     private String endereco;

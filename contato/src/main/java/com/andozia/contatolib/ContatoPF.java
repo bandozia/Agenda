@@ -9,6 +9,10 @@ public class ContatoPF extends Contato{
     private int idade;
     private String cpf;
 
+    private String cep;
+    private String endereco;
+
+
     public ContatoPF(String nome, String email, String cpf) {
         super(nome, email);
         this.cpf = cpf;
@@ -54,6 +58,21 @@ public class ContatoPF extends Contato{
         this.cpf = cpf;
     }
 
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
 
     public String imprime() {
         return super.imprime() + "ContatoPF{" +

@@ -4,6 +4,7 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.andozia.agenda.domain.Cep;
@@ -14,6 +15,7 @@ public class CepService extends IntentService {
 
     private static final String TAG = "CepService";
     public static final String CEP_EXTRA = "cep_extra";
+    public static final String CEP_BROADCAST = "com.andozia.agenda.cep.broadcast";
 
     public CepService() {
         super("cep service");
@@ -26,6 +28,10 @@ public class CepService extends IntentService {
 
         Utils utils = new Utils();
         Cep cep = utils.getCep(String.format("http://api.postmon.com.br/v1/cep/%s", cepString));
+
+        Intent broadCastIntent = new Intent(CEP_BROADCAST);
+        broadCastIntent.putExtra(CEP_EXTRA, cep);
+        LocalBroadcastManager.getInstance(this).sendBroadcast(broadCastIntent);
 
         stopSelf();
     }
@@ -47,3 +53,6 @@ public class CepService extends IntentService {
         super.onDestroy();
     }
 }
+
+
+//TODO:testar persistencia

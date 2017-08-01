@@ -1,12 +1,16 @@
 package com.andozia.agenda.app.controller;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.v4.content.LocalBroadcastManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -17,11 +21,14 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.andozia.agenda.R;
+import com.andozia.agenda.domain.Cep;
 import com.andozia.agenda.domain.ContatoDomain;
 import com.andozia.agenda.services.CepService;
+import com.andozia.agenda.utils.Auxiliar;
 import com.andozia.contatolib.Contato;
 import com.andozia.contatolib.ContatoPF;
 
+import java.io.IOException;
 import java.net.URL;
 
 
@@ -34,11 +41,22 @@ public class ContatoActivity extends Activity implements TextWatcher {
     private EditText nomeEdText,emailEdText,sobrenomeEdText;
     private Button salvarContatoBt;
     private Button deletarContatoBt;
+
     private EditText cepEditText;
     private EditText enderecoEditTex;
 
     private boolean isUpdating;
     private ContatoPF contatoInstance;
+
+    private BroadcastReceiver contatoReciver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Cep cep = (Cep)intent.getExtras().getSerializable(CepService.CEP_EXTRA);
+            enderecoEditTex.setText(cep.getEndereco());
+        }
+    };
+
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -82,6 +100,9 @@ public class ContatoActivity extends Activity implements TextWatcher {
         if (contatoInstance != null){
             popularContatoSalvo();
         }
+
+        IntentFilter filterLocal = new IntentFilter(CepService.CEP_BROADCAST);
+        LocalBroadcastManager.getInstance(this).registerReceiver(contatoReciver, filterLocal);
     }
 
     private void popularContatoSalvo(){
@@ -89,6 +110,16 @@ public class ContatoActivity extends Activity implements TextWatcher {
         sobrenomeEdText.setText(contatoInstance.getSobrenome());
         emailEdText.setText(contatoInstance.getEmail());
         cpfEditText.setText(contatoInstance.getCpf());
+        cepEditText.setText(contatoInstance.getCep());
+        enderecoEditTex.setText(contatoInstance.getEndereco());
+
+        /*try {
+            Bitmap userBitmap = Auxiliar.baixarImagem(contatoInstance.getAvatar());
+            imageView.setImageBitmap(userBitmap);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
+        //isso nao pode ser feito na thread principal, criar uma async task
 
         //TODO: colocar imagem do usuario
     }
@@ -202,6 +233,8 @@ public class ContatoActivity extends Activity implements TextWatcher {
             );
 
             contatoPF.setSobrenome(sobrenomeEdText.getText().toString());
+            contatoPF.setCep(cepEditText.getText().toString());
+            contatoPF.setEndereco(enderecoEditTex.getText().toString());
             //TODO: salvar avatar
 
             salvarContato(contatoPF);
@@ -216,6 +249,8 @@ public class ContatoActivity extends Activity implements TextWatcher {
             contatoInstance.setSobrenome(sobrenomeEdText.getText().toString());
             contatoInstance.setEmail(emailEdText.getText().toString());
             contatoInstance.setCpf(cpfEditText.getText().toString());
+            contatoInstance.setCep(cepEditText.getText().toString());
+            contatoInstance.setEndereco(enderecoEditTex.getText().toString());
             //TODO: atualizar avatar
 
             atualizarContato(contatoInstance);

@@ -36,8 +36,16 @@
         <activity android:name=".app.controller.DownloadImageActivity" />
         <activity android:name=".app.controller.WebServiceActivity" />
         <activity android:name=".app.controller.PhotoActivity" />
+        <activity android:name=".app.controller.BroadcastActivity" />
 
         <service android:name=".services.CepService" android:exported="false" />
+
+        <receiver android:name=".reciver.AndoReciver">
+            <intent-filter>
+                <action android:name="com.andozia.agenda.receiver.AndoReceiver" />
+                <category android:name="android.intent.category.APP_EMAIL" />
+            </intent-filter>
+        </receiver>
 
     </application>
 

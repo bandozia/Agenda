@@ -29,7 +29,7 @@ public class ContatoDomain {
         List<ContatoPF> contaos = Collections.emptyList();
 
         Cursor cursor = null;
-        String[] campos = {"_id","nome", "sobrenome", "email","cpf","avatar"};
+        String[] campos = {"_id","nome", "sobrenome", "email","cpf","avatar", "cep", "endereco"};
 
         CriaBanco banco = new CriaBanco(context);
         SQLiteDatabase db = banco.getReadableDatabase();
@@ -47,12 +47,16 @@ public class ContatoDomain {
                     String email = cursor.getString(cursor.getColumnIndexOrThrow("email"));
                     String cpf = cursor.getString(cursor.getColumnIndexOrThrow("cpf"));
                     String avatar = cursor.getString(cursor.getColumnIndexOrThrow("avatar"));
+                    String cep = cursor.getString(cursor.getColumnIndexOrThrow("cep"));
+                    String endereco = cursor.getString(cursor.getColumnIndexOrThrow("endereco"));
                     int id = cursor.getInt(cursor.getColumnIndexOrThrow("_id"));
 
                     ContatoPF contato = new ContatoPF(nome,email,cpf);
                     contato.setSobrenome(sobrenome);
                     contato.setId(id);
                     contato.setAvatar(avatar);
+                    contato.setEndereco(endereco);
+                    contato.setCep(cep);
 
                     contaos.add(contato);
                 }while(cursor.moveToNext());
@@ -81,6 +85,8 @@ public class ContatoDomain {
         valores.put("sobrenome", contato.getSobrenome());
         valores.put("cpf", contato.getCpf());
         valores.put("avatar", contato.getAvatar());
+        valores.put("cep", contato.getCep());
+        valores.put("endereco", contato.getEndereco());
 
         String where = "_id=" + contato.getId();
 
@@ -92,7 +98,7 @@ public class ContatoDomain {
             db.update("contato", valores, where,null);
             sucesso = true;
         }catch (Exception e){
-            Log.e("ContatoDomain update", "deu pau");
+            Log.e("ContatoDomain update", "deu pau: " + e.getMessage());
             sucesso = false;
         }finally {
             db.close();
@@ -128,6 +134,8 @@ public class ContatoDomain {
         valores.put("sobrenome", contato.getSobrenome());
         valores.put("cpf", contato.getCpf());
         valores.put("avatar", contato.getAvatar());
+        valores.put("cep", contato.getCpf());
+        valores.put("endereco", contato.getEndereco());
 
         try{
             resultado = db.insert("contato", null, valores);
