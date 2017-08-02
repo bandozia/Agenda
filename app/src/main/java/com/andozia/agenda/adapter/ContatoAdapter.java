@@ -1,6 +1,8 @@
 package com.andozia.agenda.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,23 +12,33 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.andozia.agenda.R;
+import com.andozia.agenda.utils.Auxiliar;
 import com.andozia.contatolib.Contato;
 import com.andozia.contatolib.ContatoPF;
 
+import java.io.IOException;
+import java.security.KeyPair;
+import java.util.AbstractMap;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-/**
- * Created by no3603 on 18/07/2017.
- */
 
 public class ContatoAdapter extends BaseAdapter {
+
+    private static final String TAG = "ContatoAdapter";
 
     private Context context;
     private List<ContatoPF> contatos;
 
+    private List<AbstractMap.SimpleEntry<ImageView, String>> imagesList;
+
     public ContatoAdapter(Context context, List<ContatoPF> contatos) {
         this.context = context;
         this.contatos = contatos;
+
+        imagesList = new ArrayList<>();
     }
 
     @Override
@@ -57,8 +69,40 @@ public class ContatoAdapter extends BaseAdapter {
         textViewNome.setText(contato.getNome());
         textViewEmail.setText(contato.getEmail());
 
+        imagesList.add(new AbstractMap.SimpleEntry<ImageView, String>(imageView, contato.getAvatar()));
+
+        if (position == getCount() -1){
+
+        }
+
         return linha;
     }
 
+
+    //TODO: isso esta horrivel! repensar
+    private class LoadImageAsync extends AsyncTask<Void,Bitmap,Void> {
+
+        @Override
+        protected void onProgressUpdate(Bitmap... values) {
+
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            for (AbstractMap.SimpleEntry<ImageView, String> imageMap : imagesList ){
+
+                if(imageMap.getValue() != null){
+                    try {
+                        Bitmap bitmap = Auxiliar.baixarImagem( imageMap.getValue() );
+                        publishProgress(bitmap);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+            return null;
+        }
+    }
 
 }

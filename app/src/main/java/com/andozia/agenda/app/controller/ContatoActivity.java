@@ -6,7 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Bitmap;
-import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
@@ -19,20 +19,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import com.andozia.agenda.R;
 import com.andozia.agenda.domain.Cep;
 import com.andozia.agenda.domain.ContatoDomain;
 import com.andozia.agenda.services.CepService;
 import com.andozia.agenda.utils.Auxiliar;
-import com.andozia.contatolib.Contato;
 import com.andozia.contatolib.ContatoPF;
 
 import java.io.IOException;
-import java.net.URL;
 
 
 public class ContatoActivity extends Activity implements TextWatcher {
+
+    private static final String TAG = "ContatoActivity";
 
     private static final String SERVICE_KEY_CEP = "service_key_cep";
 
@@ -113,15 +112,10 @@ public class ContatoActivity extends Activity implements TextWatcher {
         cepEditText.setText(contatoInstance.getCep());
         enderecoEditTex.setText(contatoInstance.getEndereco());
 
-        /*try {
-            Bitmap userBitmap = Auxiliar.baixarImagem(contatoInstance.getAvatar());
-            imageView.setImageBitmap(userBitmap);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
-        //isso nao pode ser feito na thread principal, criar uma async task
-
-        //TODO: colocar imagem do usuario
+        if (contatoInstance.getAvatar() != null){
+            LoadImageAsync userImageLoad = new LoadImageAsync();
+            userImageLoad.execute(contatoInstance.getAvatar());
+        }
     }
 
     @Override
@@ -278,6 +272,36 @@ public class ContatoActivity extends Activity implements TextWatcher {
             }
         }
     }
+
+    private class LoadImageAsync extends AsyncTask<String,Void,Bitmap>{
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Bitmap doInBackground(String... params) {
+
+            Bitmap bitmap = null;
+            try {
+                bitmap = Auxiliar.baixarImagem(params[0]);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return bitmap;
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            if (bitmap != null){
+                imageView.setImageBitmap(bitmap);
+            }
+        }
+    }
+
+
 }
 
 /***Olhar:******

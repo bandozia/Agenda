@@ -106,7 +106,7 @@ public class WebServiceActivity extends BaseActivity {
             ContatoPF contatoPF = new ContatoPF(pessoa.getNome(), pessoa.getEmail(), "");
             contatoPF.setSobrenome(pessoa.getSobrenome());
             contatoPF.setAvatar(pessoa.getCaminhoFoto());
-            //TODO: popular o restante das infos
+            contatoPF.setEndereco(String.format("%s - %s", pessoa.getEndereco(), pessoa.getCidade()) );
             long id = -1;
             if((id = contatoDomain.salvar(contatoPF)) > 0){
                 Toast.makeText(WebServiceActivity.this, pessoa.getNome() + " salvo no banco: " + id, Toast.LENGTH_SHORT).show();

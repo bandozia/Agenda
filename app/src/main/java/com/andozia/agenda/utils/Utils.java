@@ -17,10 +17,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * Created by no3603 on 25/07/2017.
- */
-
 public class Utils {
 
     public Pessoa getInfo(String url){
@@ -52,7 +48,6 @@ public class Utils {
 
         return cep;
     }
-
 
     private Pessoa parseJson(String json){
         Pessoa pessoa = null;
@@ -107,8 +102,9 @@ public class Utils {
             }
         }
 
-
         return bitmap;
     }
+
+
 
 }
