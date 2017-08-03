@@ -1,5 +1,7 @@
 package com.andozia.contatolib;
 
+import android.graphics.Bitmap;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -81,6 +83,7 @@ public class Contato implements Serializable {
     public void setAvatar(String avatar) {
         this.avatar = avatar;
     }
+
 
     public String imprime() {
         return "Contato{" +

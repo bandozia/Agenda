@@ -9,4 +9,10 @@
     <string name="label_busca">nome, sobrenome e e-mail</string>
     <string name="bt_buscar">buscar</string>
     <string name="label_cpf">CPF</string>
+
+    <string name="Text">Status: -</string>
+    <string name="on">Turn On</string>
+    <string name="off">Turn Off</string>
+    <string name="List">List paired Devices</string>
+    <string name="Find">Search new Devices / Cancel</string>
 </resources>

@@ -112,7 +112,7 @@ public class ContatoActivity extends Activity implements TextWatcher {
         cepEditText.setText(contatoInstance.getCep());
         enderecoEditTex.setText(contatoInstance.getEndereco());
 
-        if (contatoInstance.getAvatar() != null){
+        if (contatoInstance.getAvatar() != null ){
             LoadImageAsync userImageLoad = new LoadImageAsync();
             userImageLoad.execute(contatoInstance.getAvatar());
         }

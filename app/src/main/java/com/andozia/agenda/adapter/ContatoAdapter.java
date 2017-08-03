@@ -3,26 +3,20 @@ package com.andozia.agenda.adapter;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.andozia.agenda.R;
 import com.andozia.agenda.utils.Auxiliar;
 import com.andozia.contatolib.Contato;
 import com.andozia.contatolib.ContatoPF;
-
 import java.io.IOException;
-import java.security.KeyPair;
 import java.util.AbstractMap;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 public class ContatoAdapter extends BaseAdapter {
@@ -32,13 +26,20 @@ public class ContatoAdapter extends BaseAdapter {
     private Context context;
     private List<ContatoPF> contatos;
 
-    private List<AbstractMap.SimpleEntry<ImageView, String>> imagesList;
+    private List<AbstractMap.SimpleEntry<ContatoPF,Bitmap>> bitMapsList;
 
     public ContatoAdapter(Context context, List<ContatoPF> contatos) {
         this.context = context;
         this.contatos = contatos;
 
-        imagesList = new ArrayList<>();
+        bitMapsList = new ArrayList<>();
+
+        for (ContatoPF contato : contatos){
+            bitMapsList.add(new AbstractMap.SimpleEntry<ContatoPF, Bitmap>(contato, null));
+        }
+
+        LoadImageAsync loadImageAsync = new LoadImageAsync();
+        loadImageAsync.execute();
     }
 
     @Override
@@ -69,17 +70,10 @@ public class ContatoAdapter extends BaseAdapter {
         textViewNome.setText(contato.getNome());
         textViewEmail.setText(contato.getEmail());
 
-        imagesList.add(new AbstractMap.SimpleEntry<ImageView, String>(imageView, contato.getAvatar()));
-
-        if (position == getCount() -1){
-
-        }
-
         return linha;
     }
 
-
-    //TODO: isso esta horrivel! repensar
+    //TODO: vincular ao progresso
     private class LoadImageAsync extends AsyncTask<Void,Bitmap,Void> {
 
         @Override
@@ -89,15 +83,13 @@ public class ContatoAdapter extends BaseAdapter {
 
         @Override
         protected Void doInBackground(Void... params) {
-            for (AbstractMap.SimpleEntry<ImageView, String> imageMap : imagesList ){
+            for (ContatoPF contatoPF : contatos ){
 
-                if(imageMap.getValue() != null){
-                    try {
-                        Bitmap bitmap = Auxiliar.baixarImagem( imageMap.getValue() );
-                        publishProgress(bitmap);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                try {
+                    Bitmap bitmap = Auxiliar.baixarImagem( contatoPF.getAvatar() );
+                    publishProgress(bitmap);
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
 
             }
