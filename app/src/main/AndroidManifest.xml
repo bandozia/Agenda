@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.andozia.agenda">
-    
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+
     <uses-feature android:name="android.hardware.camera2" />
-    
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -17,14 +21,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity android:name=".app.controller.MenuActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".app.controller.ListaContatosActivity" />
         <activity android:name=".app.controller.ScrollViewActivity" />
         <activity android:name=".app.controller.CardViewActivity" />
@@ -46,13 +49,25 @@
         <activity android:name=".app.controller.MenuBluetoohActivity" />
         <activity android:name=".app.controller.BluetoothIntroActivity" />
         <activity android:name=".app.controller.BluetoothChatActivity" />
+        <activity android:name=".app.controller.MenuSmsActivity" />
+        <activity android:name=".app.controller.EnviarSmsActivity" />
+        <activity android:name=".app.controller.ReceberSmsActivity"></activity>
 
-        <service android:name=".services.CepService" android:exported="false" />
+        <service
+            android:name=".services.CepService"
+            android:exported="false" />
 
         <receiver android:name=".reciver.AndoReciver">
             <intent-filter>
                 <action android:name="com.andozia.agenda.receiver.AndoReceiver" />
                 <category android:name="android.intent.category.APP_EMAIL" />
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name=".reciver.IntercepSmsReceiver"
+            android:permission="android.permission.BROADCAST_SMS">
+            <intent-filter>
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
         </receiver>
 

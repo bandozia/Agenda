@@ -24,6 +24,7 @@ public class MenuActivity extends Activity implements View.OnClickListener {
         ((Button) findViewById(R.id.btMenuBroadcast)).setOnClickListener(this);
         ((Button) findViewById(R.id.btMenuSensor)).setOnClickListener(this);
         ((Button) findViewById(R.id.btMenuBlueTooth)).setOnClickListener(this);
+        ((Button) findViewById(R.id.btMenuSms)).setOnClickListener(this);
     }
 
     @Override
@@ -58,6 +59,10 @@ public class MenuActivity extends Activity implements View.OnClickListener {
 
             case R.id.btMenuBlueTooth:
                 intent = new Intent(this, MenuBluetoohActivity.class);
+                break;
+
+            case R.id.btMenuSms:
+                intent = new Intent(this, MenuSmsActivity.class);
                 break;
         }
 
