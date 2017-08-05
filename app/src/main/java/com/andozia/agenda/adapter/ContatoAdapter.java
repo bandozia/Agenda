@@ -26,20 +26,9 @@ public class ContatoAdapter extends BaseAdapter {
     private Context context;
     private List<ContatoPF> contatos;
 
-    private List<AbstractMap.SimpleEntry<ContatoPF,Bitmap>> bitMapsList;
-
     public ContatoAdapter(Context context, List<ContatoPF> contatos) {
         this.context = context;
         this.contatos = contatos;
-
-        bitMapsList = new ArrayList<>();
-
-        for (ContatoPF contato : contatos){
-            bitMapsList.add(new AbstractMap.SimpleEntry<ContatoPF, Bitmap>(contato, null));
-        }
-
-        LoadImageAsync loadImageAsync = new LoadImageAsync();
-        loadImageAsync.execute();
     }
 
     @Override
@@ -73,28 +62,6 @@ public class ContatoAdapter extends BaseAdapter {
         return linha;
     }
 
-    //TODO: vincular ao progresso
-    private class LoadImageAsync extends AsyncTask<Void,Bitmap,Void> {
 
-        @Override
-        protected void onProgressUpdate(Bitmap... values) {
-
-        }
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            for (ContatoPF contatoPF : contatos ){
-
-                try {
-                    Bitmap bitmap = Auxiliar.baixarImagem( contatoPF.getAvatar() );
-                    publishProgress(bitmap);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-            }
-            return null;
-        }
-    }
 
 }

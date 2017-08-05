@@ -2,6 +2,8 @@ package com.andozia.agenda.app.controller;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -11,15 +13,18 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.andozia.agenda.R;
 import com.andozia.agenda.adapter.AutocompleteAdapter;
 import com.andozia.agenda.adapter.ContatoAdapter;
 import com.andozia.agenda.domain.ContatoDomain;
+import com.andozia.agenda.utils.Auxiliar;
 import com.andozia.contatolib.Contato;
 import com.andozia.contatolib.ContatoPF;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,8 +47,6 @@ public class ListaContatosActivity extends Activity implements AdapterView.OnIte
         edtBusca = (AutoCompleteTextView) findViewById(R.id.edtBuscar);
         lstContatos = (ListView) findViewById(R.id.lstContatos);
 
-        atualizaLista();
-
         AutocompleteAdapter autocompleteAdapter = new AutocompleteAdapter(this, R.layout.autocomplete_layout, buildContatos());
         edtBusca.setAdapter(autocompleteAdapter);
         edtBusca.setThreshold(1);
@@ -51,6 +54,17 @@ public class ListaContatosActivity extends Activity implements AdapterView.OnIte
 
 
         lstContatos.setOnItemClickListener(this);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        atualizaLista();
+    }
+
+    private void atualizarImagens(){
 
     }
 
@@ -77,6 +91,15 @@ public class ListaContatosActivity extends Activity implements AdapterView.OnIte
         intent.putExtra("contato", contato);
         startActivity(intent);
 
+    }
+
+    //TODO: vincular ao progresso
+    private class LoadImageAsync extends AsyncTask<ListView,Void,Void> {
+
+        @Override
+        protected Void doInBackground(ListView... params) {
+            return null;
+        }
     }
 
 }
